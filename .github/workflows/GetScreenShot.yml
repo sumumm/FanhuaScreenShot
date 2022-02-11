@@ -1,0 +1,37 @@
+#**=====================================================================
+#* FileName: GetScreenShot.yml
+#* FileInstructions: Github Action自动获取某网站主页截图
+#* Attention：开始之前要确保 Github 和 Gitee 中已经保存了本机的公钥.ssh/id_rsa.pub
+#* Environment Variables：
+#*                       SCREEN_SHOT_TOKEN:Github中Personal access tokens
+#* =======================================================================*/
+name: GetScreenShot
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  push:
+    branches:
+      - master
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download
+      env:
+        SCREEN_SHOT_ADDRESS: https://image.thum.io/get/width/400/crop/800/allowJPG/wait/20/noanimate
+      run: |
+        curl ${SCREEN_SHOT_ADDRESS}/https://akilar.top/ -o akilar.top.jpg
+        curl ${SCREEN_SHOT_ADDRESS}/https://hexo.io/ -o hexo.io.jpg
+        curl ${SCREEN_SHOT_ADDRESS}/https://qidaink.github.io/ -o qidaink.github.io.jpg
+        curl ${SCREEN_SHOT_ADDRESS}/https://qidaink-vercel-pages.vercel.app/ -o qidaink-vercel-pages.vercel.app.jpg
+        curl ${SCREEN_SHOT_ADDRESS}/https://qidaink.gitee.io/ -o qidaink.gitee.io.jpg
+        curl ${SCREEN_SHOT_ADDRESS}/https://zfe.space/ -o zfe.space.jpg
+        
+        curl https://purge.jsdelivr.net/gh/qidaink/FanhuaScreenShot@gh-pages/*.*
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.SCREEN_SHOT_TOKEN }}
+        publish_dir: ./
