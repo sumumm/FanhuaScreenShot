@@ -28,6 +28,7 @@ jobs:
         curl ${SCREEN_SHOT_ADDRESS}/https://qidaink-vercel-pages.vercel.app/ -o qidaink-vercel-pages.vercel.app.jpg
         curl ${SCREEN_SHOT_ADDRESS}/https://qidaink.gitee.io/ -o qidaink.gitee.io.jpg
         curl ${SCREEN_SHOT_ADDRESS}/https://zfe.space/ -o zfe.space.jpg
+        curl ${SCREEN_SHOT_ADDRESS}/https://noionion.top/ -o noionion.top.jpg
         
         curl https://purge.jsdelivr.net/gh/qidaink/FanhuaScreenShot@gh-pages/*.*
     - name: Deploy
